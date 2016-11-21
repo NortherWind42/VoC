@@ -2,7 +2,7 @@
   "name": "voc",
   "version": "0.0.0",
   "scripts": {
-    "serve": "concurrently \"lite-server\" \"grunt\""
+    "start": "concurrently \"lite-server\" \"grunt\""
   },
   "author": "Oleg Vasilyev & Alexander Stukachyov",
   "license": "ISC",
@@ -25,6 +25,5 @@
   "repository": {
     "type": "git",
     "url": "//github.com/NortherWind42/VoC.git"
-  },
-  "description": ""
+  }
 }

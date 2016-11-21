@@ -9,10 +9,26 @@ voc {
 			font-size: 24px;
 			padding: 8px;
 			background: white;
+
+			& span {
+				&:hover {
+					cursor: pointer;
+				}
+			}
 		}
 
-		&_textarea-container {
-			margin: 20px;
+		&_log-container {
+			margin-top: 115px;
+			min-height: 330px;
+
+			& fieldset {
+				min-height: 245px;
+			}
 		}
 	}
+}
+
+.tooltip-inner {
+	font-size: 20px !important;
+	padding: 6px 16px !important;
 }

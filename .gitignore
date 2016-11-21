@@ -70,6 +70,8 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
-
-node_modules 
-styles.css
+######################
+# Custom #
+######################
+wwwroot/node_modules 
+wwwroot/styles.css

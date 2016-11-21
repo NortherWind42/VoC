@@ -3,11 +3,12 @@
 
 <head>
 	<meta charset="UTF-8">
+	<link rel="icon" href="icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
 	<title>VoC</title>
 
 	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-
 	<link rel="stylesheet" href="styles.css">
 </head>
 
@@ -15,12 +16,85 @@
 
 	<voc>
 
-		<div class="voc_textarea-container">
-			<div class="voc_textarea" contenteditable="true" spellcheck="false">
-					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, atque.
-			</div>
-		</div>
+		<div class="container">
 
+			<div class="row">
+
+				<div class="col-sm-12 col-md-6">
+
+					<div class="well voc_log-container">
+						<form>
+							<fieldset>
+								<legend>Вход</legend>
+								<div class="form-group">
+									<label for="loginInter" class="col-xs-2 control-label">Login</label>
+
+									<div class="col-xs-10">
+										<input type="text" class="form-control" id="loginInter" placeholder="Login">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordInter" class="col-xs-2 control-label">Password</label>
+
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordInter" placeholder="Password">
+									</div>
+								</div>
+							</fieldset>
+
+						</form>
+						<a href="javascript:void(0)" class="btn btn-raised btn-primary">Log in</a>
+					</div>
+
+				</div>
+
+				<div class="col-sm-12 col-md-6">
+
+					<div class="well voc_log-container">
+						<form>
+							<fieldset>
+								<legend>Регистрация</legend>
+								<div class="form-group">
+									<label for="loginReg" class="col-xs-2 control-label">Login</label>
+
+									<div class="col-xs-10">
+										<input type="text" class="form-control" id="loginReg" placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordReg" class="col-xs-2 control-label">Password</label>
+
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordReg" placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
+
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
+									</div>
+								</div>
+							</fieldset>
+							<a href="javascript:void(0)" class="btn btn-raised btn-primary">Sing up</a>
+						</form>
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="row">
+				<div class="jumbotron">
+					<div class="container">
+						<h3>Текст для распознавания:</h3>
+						<div class="voc_textarea" contenteditable spellcheck="false">
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 
 	</voc>
 
@@ -29,43 +103,8 @@
 	<script src="node_modules\bootstrap-material-design\dist\js\material.min.js"></script>
 	<script src="node_modules\bootstrap-material-design\dist\js\ripples.min.js"></script>
 
-	<script>
-			let oldText = "";
-
-		$(".voc_textarea").on("change keyup paste", function() {
-
-			let isSpacePressed = false;
-			$(".voc_textarea").keypress(function(e) {
-				if (e.which == 32) {
-					isSpacePressed = true;
-				}
-			});
-			
-			if (isSpacePressed) {
-				return;
-			}
-
-			let text = $(this).text();
-
-			if (oldText === text) {
-				return;
-			}
-
-			oldText = text;
-
-			let wordArr = text.split(" ");
-			let newWordArr = [];
-
-			for (word of wordArr) {
-				newWordArr.push(`<span>${word}</span>`);
-			}
-
-			$(".voc_textarea").html(newWordArr.join(" "));
-
-		//	console.log(newText);
-
-		});
-	</script>
+	<script src="contenteditableCursorManager.js"></script>
+	<script src="contenteditableInputTextConverter.js"></script>
 
 	<script>$.material.init()</script>
 </body>
