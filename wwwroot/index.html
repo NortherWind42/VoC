@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+
+	<title>VoC</title>
+
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+
+	<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+	<voc>
+
+		<div class="voc_textarea-container">
+			<div class="voc_textarea" contenteditable="true" spellcheck="false">
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quo, atque.
+			</div>
+		</div>
+
+
+	</voc>
+
+	<script src="node_modules\jquery\dist\jquery.min.js"></script>
+	<script src="node_modules\bootstrap\dist\js\bootstrap.min.js"></script>
+	<script src="node_modules\bootstrap-material-design\dist\js\material.min.js"></script>
+	<script src="node_modules\bootstrap-material-design\dist\js\ripples.min.js"></script>
+
+	<script>
+			let oldText = "";
+
+		$(".voc_textarea").on("change keyup paste", function() {
+
+			let isSpacePressed = false;
+			$(".voc_textarea").keypress(function(e) {
+				if (e.which == 32) {
+					isSpacePressed = true;
+				}
+			});
+			
+			if (isSpacePressed) {
+				return;
+			}
+
+			let text = $(this).text();
+
+			if (oldText === text) {
+				return;
+			}
+
+			oldText = text;
+
+			let wordArr = text.split(" ");
+			let newWordArr = [];
+
+			for (word of wordArr) {
+				newWordArr.push(`<span>${word}</span>`);
+			}
+
+			$(".voc_textarea").html(newWordArr.join(" "));
+
+		//	console.log(newText);
+
+		});
+	</script>
+
+	<script>$.material.init()</script>
+</body>
+
+</html>
