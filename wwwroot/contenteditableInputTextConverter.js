@@ -20,14 +20,11 @@
 			}
 		);
 
-		//доделать! хуево работает
 		let clearHtml = html.replace(
-			/[ ]((<span.*>)[^\w]*(<\/span>))[ ]/gm, function (match, value) {
+			/(\<[span]{4}(\s+)([A-Za-z0-9-\=\ \"]*)\>)(\s*)(\<\/[span]{4}\>)/gm, function (match, value) {
 				return "";
 			}
 		);
-		//доделать!
-
 
 		$(this).html(clearHtml);
 
