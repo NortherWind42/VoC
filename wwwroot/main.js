@@ -6,12 +6,6 @@
 
 		installTooltip();
 
-		(function () {
-			$(function () {
-				$('[data-toggle="tooltip"]').tooltip()
-			})
-		})();
-
 		cursorManager.setEndOfContenteditable($(this)[0]);
 	});
 
