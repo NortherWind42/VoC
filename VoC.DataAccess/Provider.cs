@@ -56,14 +56,26 @@ namespace VoC.DataAccess
                 WordValue = word
             };
 
+            string lastResponse = "";
             var languageList = context.Languages.ToList();
+
             foreach (var item in languageList)
             {
-                string value = Regex.Match(LanguageCode(word, item.Code).Result, "lang=\"(..)\"").Value.Replace("lang=\"", string.Empty).Replace("\"", string.Empty);
+                string value = Regex.Match(TranslationApiResponse(word, item.Code), "lang=\"(..)\"").Value.Replace("lang=\"", string.Empty).Replace("\"", string.Empty);
 
                 if (value == item.Code)
                 {
                     wordModel.Languages.Add(item);
+                }
+                lastResponse = value;
+            }
+
+            if (wordModel.Languages.Count == 0 && lastResponse == "")
+            {
+                var ruslang = languageList.Where(m => m.Code == "ru");
+                if (ruslang.Any())
+                {
+                    wordModel.Languages.Add(ruslang.First());
                 }
             }
             context.Words.Add(wordModel);
@@ -77,7 +89,7 @@ namespace VoC.DataAccess
             return users;
         }
 
-        private async Task<string> LanguageCode(string word, string language)
+        private string TranslationApiResponse(string word, string language)
         {
             using (var client = new HttpClient())
             {
@@ -91,9 +103,9 @@ namespace VoC.DataAccess
 
                 var request = (HttpWebRequest)WebRequest.Create("https://translate.yandex.net/api/v1.5/tr/detect");
 
-                var postData = "key="+ key;
-                postData += "&text="+ word;
-                postData += "&hint="+ language;
+                var postData = "key=" + key;
+                postData += "&text=" + word;
+                postData += "&hint=" + language;
                 var data = Encoding.ASCII.GetBytes(postData);
 
                 request.Method = "POST";
@@ -108,12 +120,6 @@ namespace VoC.DataAccess
                 var response = (HttpWebResponse)request.GetResponse();
 
                 return new StreamReader(response.GetResponseStream()).ReadToEnd();
-
-                //var content = new FormUrlEncodedContent(values);
-
-                //var responses = await client.PostAsync("https://translate.yandex.net/api/v1.5/tr/detect", content);
-
-                //return await responses.Content.ReadAsStringAsync();
             }
         }
 

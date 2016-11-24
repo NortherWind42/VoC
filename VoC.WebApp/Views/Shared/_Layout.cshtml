@@ -1,41 +1,116 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="ru">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="UTF-8">
+    <link rel="icon" href="icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>VoC</title>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" href="../wwwroot/styles.css">
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <voc class="voc">
+
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+            <div class="row">
+
+                <div class="col-sm-12 col-md-6">
+
+                    <div class="well voc_log-container">
+                        <form>
+                            <fieldset>
+                                <legend>Вход</legend>
+                                <div class="form-group">
+                                    <label for="loginInter" class="col-xs-2 control-label">Login</label>
+
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="loginInter" placeholder="Login">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordInter" class="col-xs-2 control-label">Password</label>
+
+                                    <div class="col-xs-10">
+                                        <input type="password" class="form-control" id="passwordInter" placeholder="Password">
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                        </form>
+                        <a href="javascript:Login()" class="btn btn-raised btn-primary">Log in</a>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-12 col-md-6">
+
+                    <div class="well voc_log-container">
+                        <form>
+                            <fieldset>
+                                <legend>Регистрация</legend>
+                                <div class="form-group">
+                                    <label for="loginReg" class="col-xs-2 control-label">Login</label>
+
+                                    <div class="col-xs-10">
+                                        <input type="text" class="form-control" id="loginReg" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordReg" class="col-xs-2 control-label">Password</label>
+
+                                    <div class="col-xs-10">
+                                        <input type="password" class="form-control" id="passwordReg" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
+
+                                    <div class="col-xs-10">
+                                        <input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <a href="javascript:SignUp()" class="btn btn-raised btn-primary">Sing up</a>
+                        </form>
+                    </div>
+
+                </div>
+
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                    <li>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                </ul>
+
+            <div class="row">
+                <div class="jumbotron">
+                    <div class="container">
+                        <h3>Текст для распознавания:</h3>
+                        <div class="voc_textarea" contenteditable spellcheck="false">
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </voc>
+    @RenderBody()
+    @Scripts.Render("~/bundles/app-scripts")
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+    $(function () {
+
+        var notificationhub = $.connection.userTop;
+
+        notificationhub.client.UpdateList = function () {
+            console.log("Update statistic")
+        };
+        $.connection.hub.start();
+    });
+    </script>
+
+    <script>$.material.init()</script>
 </body>
 </html>

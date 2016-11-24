@@ -24,10 +24,6 @@ var installTooltip = function () {
 		function (current) {
 
 			let word = current.currentTarget.innerText;
-
-			// >посылаем слово на бэк
-			// >возвращаем язык
-		    // >профит
 			data = { word: word}
 			$.ajax({
 			    url: '/api/Main/GetTranslation',
@@ -37,14 +33,11 @@ var installTooltip = function () {
 			        'Content-Type': 'application/json'
 			    },
 			}).done(function (data) {
-			    let languageLine = languages['en'];
-
-			    $(current.currentTarget).attr('data-original-title', languageLine);
+			    $(current.currentTarget).attr('data-original-title', data);
 
 			    $(function () {
 			        $(current.currentTarget).tooltip('show')
 			    })
-			    //sessionStorage.setItem("token", data.access_token);
 			});
 
 			

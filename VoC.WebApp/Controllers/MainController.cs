@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using VoC.DataAccess;
+using VoC.WebApp.Hubs;
 
 namespace VoC.WebApp.Controllers
 {
@@ -22,17 +23,24 @@ namespace VoC.WebApp.Controllers
         [Route("GetTranslation")]
         public IHttpActionResult GetTranslation(string word)
         {
-            if(!string.IsNullOrWhiteSpace(word) && word.Length > 4)
+            if (!string.IsNullOrWhiteSpace(word) && word.Length > 4)
             {
-                Provider provider = new Provider();
-                var selectedWord = provider.CheckWord(word, UserId);
-
-                if (selectedWord == null)
+                string result = string.Empty; 
+                using (Provider provider = new Provider())
                 {
-                    selectedWord = provider.AddWords(word);
+                    var selectedWord = provider.CheckWord(word, UserId);
+
+                    if (selectedWord == null)
+                    {
+                        selectedWord = provider.AddWords(word);
+                    }
+                    result = String.Join(", ", selectedWord.Languages.Select(m => m.Name));
                 }
-                var st = Newtonsoft.Json.JsonConvert.SerializeObject(selectedWord);
-                return Ok(st);
+
+                var context = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<UserTop>();
+                context.Clients.All.UpdateList();
+
+                return Ok(result);
             }
             else
             {
