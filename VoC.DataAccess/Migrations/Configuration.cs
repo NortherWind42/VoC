@@ -1,4 +1,4 @@
-namespace VoC.DataAccess.Migrations
+п»їnamespace VoC.DataAccess.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -16,12 +16,12 @@ namespace VoC.DataAccess.Migrations
         {
             //  This method will be called after migrating to the latest version.
               context.Languages.AddOrUpdate( m=>m.Code,
-                new Language { Name = "Английский" , Code= "en"},
-                new Language { Name = "Русский", Code = "ru"},
-                new Language { Name = "Португальский", Code = "pt"},
-                new Language { Name = "Болгарский", Code = "bg" },
-                new Language { Name = "Испанский", Code = "es" }
-              );
+								new Language { Name = "РђРЅРіР»РёР№СЃРєРёР№", Code = "en" },
+								new Language { Name = "Р СѓСЃСЃРєРёР№", Code = "ru" },
+								new Language { Name = "РџРѕСЂС‚СѓРіР°Р»СЊСЃРєРёР№", Code = "pt" },
+								new Language { Name = "Р‘РѕР»РіР°СЂСЃРєРёР№", Code = "bg" },
+								new Language { Name = "РСЃРїР°РЅСЃРєРёР№", Code = "es" }
+							);
             context.SaveChanges();
         }
     }
