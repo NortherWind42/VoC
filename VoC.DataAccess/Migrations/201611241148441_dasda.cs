@@ -3,7 +3,7 @@ namespace VoC.DataAccess.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class _123 : DbMigration
+    public partial class dasda : DbMigration
     {
         public override void Up()
         {
@@ -13,23 +13,9 @@ namespace VoC.DataAccess.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
+                        Code = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Translations",
-                c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        LanguageId = c.Int(),
-                        WordId = c.Int(),
-                        Possibility = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Words", t => t.WordId)
-                .ForeignKey("dbo.Languages", t => t.LanguageId)
-                .Index(t => t.LanguageId)
-                .Index(t => t.WordId);
             
             CreateTable(
                 "dbo.Words",
@@ -45,23 +31,37 @@ namespace VoC.DataAccess.Migrations
                 c => new
                     {
                         UserId = c.Guid(nullable: false),
+                        Username = c.String(),
                         RequestCounter = c.Int(nullable: false),
                         LastRequest = c.DateTime(nullable: false),
-                        AverageTime = c.DateTime(nullable: false),
+                        AverageTime = c.Time(nullable: false, precision: 7),
                     })
                 .PrimaryKey(t => t.UserId);
+            
+            CreateTable(
+                "dbo.TranslationsRelation",
+                c => new
+                    {
+                        LanguageRefId = c.Int(nullable: false),
+                        WordsRefId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.LanguageRefId, t.WordsRefId })
+                .ForeignKey("dbo.Languages", t => t.LanguageRefId, cascadeDelete: true)
+                .ForeignKey("dbo.Words", t => t.WordsRefId, cascadeDelete: true)
+                .Index(t => t.LanguageRefId)
+                .Index(t => t.WordsRefId);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Translations", "LanguageId", "dbo.Languages");
-            DropForeignKey("dbo.Translations", "WordId", "dbo.Words");
-            DropIndex("dbo.Translations", new[] { "WordId" });
-            DropIndex("dbo.Translations", new[] { "LanguageId" });
+            DropForeignKey("dbo.TranslationsRelation", "WordsRefId", "dbo.Words");
+            DropForeignKey("dbo.TranslationsRelation", "LanguageRefId", "dbo.Languages");
+            DropIndex("dbo.TranslationsRelation", new[] { "WordsRefId" });
+            DropIndex("dbo.TranslationsRelation", new[] { "LanguageRefId" });
+            DropTable("dbo.TranslationsRelation");
             DropTable("dbo.UserHistory");
             DropTable("dbo.Words");
-            DropTable("dbo.Translations");
             DropTable("dbo.Languages");
         }
     }

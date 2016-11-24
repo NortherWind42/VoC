@@ -51,21 +51,9 @@
   <ItemGroup>
     <Compile Include="Language.cs" />
     <Compile Include="MainContext.cs" />
-    <Compile Include="Migrations\201611151817325_123.cs" />
-    <Compile Include="Migrations\201611151817325_123.Designer.cs">
-      <DependentUpon>201611151817325_123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611151827443_213.cs" />
-    <Compile Include="Migrations\201611151827443_213.Designer.cs">
-      <DependentUpon>201611151827443_213.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611161954297_213123.cs" />
-    <Compile Include="Migrations\201611161954297_213123.Designer.cs">
-      <DependentUpon>201611161954297_213123.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611162037061_213123v.cs" />
-    <Compile Include="Migrations\201611162037061_213123v.Designer.cs">
-      <DependentUpon>201611162037061_213123v.cs</DependentUpon>
+    <Compile Include="Migrations\201611241148441_dasda.cs" />
+    <Compile Include="Migrations\201611241148441_dasda.Designer.cs">
+      <DependentUpon>201611241148441_dasda.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,17 +69,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611151817325_123.resx">
-      <DependentUpon>201611151817325_123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611151827443_213.resx">
-      <DependentUpon>201611151827443_213.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611161954297_213123.resx">
-      <DependentUpon>201611161954297_213123.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611162037061_213123v.resx">
-      <DependentUpon>201611162037061_213123v.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611241148441_dasda.resx">
+      <DependentUpon>201611241148441_dasda.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

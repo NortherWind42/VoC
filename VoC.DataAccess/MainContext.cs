@@ -10,7 +10,7 @@ namespace VoC.DataAccess
     public partial class MainContext : DbContext
     {
         public MainContext()
-            : base(@"Data Source=(LocalDb)\MSSQLLocalDB;Initial Catalog=VoC;Integrated Security=True")
+            : base(@"Data Source=localhost;Initial Catalog=VoC;Integrated Security=True")
         {
         }
 

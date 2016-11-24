@@ -15,17 +15,14 @@ namespace VoC.DataAccess.Migrations
         protected override void Seed(VoC.DataAccess.MainContext context)
         {
             //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+              context.Languages.AddOrUpdate( m=>m.Code,
+                new Language { Name = "Английский" , Code= "en"},
+                new Language { Name = "Русский", Code = "ru"},
+                new Language { Name = "Португальский", Code = "pt"},
+                new Language { Name = "Болгарский", Code = "bg" },
+                new Language { Name = "Испанский", Code = "es" }
+              );
+            context.SaveChanges();
         }
     }
 }
