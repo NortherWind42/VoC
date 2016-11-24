@@ -11,14 +11,18 @@ using VoC.DataAccess;
 
 namespace VoC.WebApp.Controllers
 {
+    [RoutePrefix("api/Main")]
     [Authorize]
     public class MainController : ApiController
     {
         private Guid _userId = Guid.Empty;
         private ApplicationUserManager _userManager;
+
+        [HttpGet]
+        [Route("GetTranslation")]
         public IHttpActionResult GetTranslation(string word)
         {
-            if(string.IsNullOrWhiteSpace(word) && word.Length > 4)
+            if(!string.IsNullOrWhiteSpace(word) && word.Length > 4)
             {
                 Provider provider = new Provider();
                 var selectedWord = provider.CheckWord(word, UserId);
@@ -27,8 +31,8 @@ namespace VoC.WebApp.Controllers
                 {
                     selectedWord = provider.AddWords(word);
                 }
-
-                return Ok(selectedWord);
+                var st = Newtonsoft.Json.JsonConvert.SerializeObject(selectedWord);
+                return Ok(st);
             }
             else
             {

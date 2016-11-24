@@ -12,7 +12,7 @@ namespace VoC.DataAccess
 {
     public class Provider : IDisposable
     {
-        const string key = "trnsl.1.1.20161115T185645Z.4a3f4036470054b5.69e2a32d168f8676c34b4446846234ce829f7dd8";
+        const string key = "trnsl.1.1.20161124T130153Z.2beb53fe9af9b0e0.68e641a241ea4a230747a8c160f2b294bf1f3f58";
         const string unknown = "unknown";
         private MainContext context;
         private object contextDisposeLocker = new object();
@@ -31,15 +31,16 @@ namespace VoC.DataAccess
                 RequestCounter = 0,
                 UserId = userId
             });
+            context.SaveChanges();
         }
 
         public Word CheckWord(string word, Guid userId)
         {
-            var values = context.Words.Include("Languages").Where(m => m.WordValue == word).First();
+            var values = context.Words.Include("Languages").Where(m => m.WordValue == word).FirstOrDefault();
 
             var user = context.UserHistory.Where(m => m.UserId == userId).First();
             user.RequestCounter++;
-            var average = (user.AverageTime + (user.LastRequest - DateTime.Now));
+            var average = (user.AverageTime + (DateTime.Now - user.LastRequest));
             user.AverageTime = new TimeSpan(average.Ticks / 2);
             user.LastRequest = DateTime.Now;
             context.Entry(user).State = System.Data.Entity.EntityState.Modified;
@@ -60,7 +61,7 @@ namespace VoC.DataAccess
             {
                 string value = Regex.Match(LanguageCode(word, item.Code).Result, "lang=\"(..)\"").Value.Replace("lang=\"", string.Empty).Replace("\"", string.Empty);
 
-                if(value == item.Code)
+                if (value == item.Code)
                 {
                     wordModel.Languages.Add(item);
                 }
@@ -87,11 +88,32 @@ namespace VoC.DataAccess
                    { "hint", language}
                 };
 
-                var content = new FormUrlEncodedContent(values);
 
-                var responses = await client.PostAsync("https://translate.yandex.net/api/v1.5/tr/detect", content);
+                var request = (HttpWebRequest)WebRequest.Create("https://translate.yandex.net/api/v1.5/tr/detect");
 
-                return await responses.Content.ReadAsStringAsync();
+                var postData = "key="+ key;
+                postData += "&text="+ word;
+                postData += "&hint="+ language;
+                var data = Encoding.ASCII.GetBytes(postData);
+
+                request.Method = "POST";
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = data.Length;
+
+                using (var stream = request.GetRequestStream())
+                {
+                    stream.Write(data, 0, data.Length);
+                }
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                return new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                //var content = new FormUrlEncodedContent(values);
+
+                //var responses = await client.PostAsync("https://translate.yandex.net/api/v1.5/tr/detect", content);
+
+                //return await responses.Content.ReadAsStringAsync();
             }
         }
 

@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using VoC.WebApp.Models;
 using VoC.WebApp.Providers;
 using VoC.WebApp.Results;
+using VoC.DataAccess;
 
 namespace VoC.WebApp.Controllers
 {
@@ -336,7 +337,8 @@ namespace VoC.WebApp.Controllers
             {
                 return GetErrorResult(result);
             }
-
+            Provider provider = new Provider();
+            provider.AddNewUser(Guid.Parse(user.Id), user.UserName);
             return Ok();
         }
 
