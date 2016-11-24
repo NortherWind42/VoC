@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201611242141581_dfsafds.Designer.cs">
       <DependentUpon>201611242141581_dfsafds.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611241839017_123.cs" />
+    <Compile Include="Migrations\201611241839017_123.Designer.cs">
+      <DependentUpon>201611241839017_123.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Provider.cs" />
@@ -86,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611242141581_dfsafds.resx">
       <DependentUpon>201611242141581_dfsafds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611241839017_123.resx">
+      <DependentUpon>201611241839017_123.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

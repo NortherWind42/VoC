@@ -44,7 +44,7 @@
 
 						</form>
 						<a href="javascript:login()" class="btn btn-raised btn-primary">Log in</a>
-						<a href="javascript:logout()" class="btn btn-raised btn-primary">Log out</a>
+						<a href="javascript:logout()" id="logout" class="btn btn-raised btn-primary disabled">Log out</a>
 					</div>
 
 				</div>
@@ -85,11 +85,13 @@
 
 			</div>
 
-			<div class="row">
-				<div class="jumbotron">
-					<div class="container">
-						<h3>Текст для распознавания:</h3>
-						<div class="voc_textarea" contenteditable="false" spellcheck="false">
+			<div class="voc_recognition-container hidden">
+				<div class="row">
+					<div class="jumbotron">
+						<div class="container">
+							<h3>Текст для распознавания:</h3>
+							<div class="voc_textarea" contenteditable="false" spellcheck="false">
+							</div>
 						</div>
 					</div>
 				</div>

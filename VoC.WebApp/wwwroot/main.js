@@ -15,9 +15,12 @@
 let authorizeProcess = function () {
 	let token = localStorage.getItem("token");
 	if (token) {
+		$(".voc_recognition-container").removeClass("hidden");
+
 		$(".voc_textarea").attr('contenteditable', "true");
 		let userName = localStorage.getItem("userName");
 		$("#loginInter").val(userName);
+		$("#logout").removeClass("disabled");
 		console.log(`user ${userName} is authorized`)
 	}
 };
@@ -38,7 +41,7 @@ function signUp() {
 		contentType: 'application/json; charset=utf-8',
 		data: JSON.stringify(data)
 	}).done(function (data) {
-		console.log(data);
+		console.log("user successfully added");
 	});
 }
 
@@ -54,6 +57,7 @@ function login() {
 		url: '/Token',
 		data: loginData
 	}).done(function (data) {
+		$("#logout").removeClass("disabled");
 		localStorage.setItem("token", data.access_token);
 		localStorage.setItem("userName", data.userName);
 		authorizeProcess();
@@ -74,7 +78,9 @@ function logout() {
 		localStorage.removeItem("userName");
 		$("#loginInter").val("");
 		$("#passwordInter").val("");
+		$(".voc_recognition-container").addClass("hidden");
 		$(".voc_textarea").attr('contenteditable', "false");
+		$("#logout").addClass("disabled");
 		console.log("logout is done");
 	});
 }
