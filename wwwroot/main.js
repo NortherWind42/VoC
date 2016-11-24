@@ -7,6 +7,7 @@
 		installTooltip();
 
 		cursorManager.setEndOfContenteditable($(this)[0]);
+		
 	});
 
 })();

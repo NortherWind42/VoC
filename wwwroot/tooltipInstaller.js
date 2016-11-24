@@ -1,19 +1,18 @@
 var installTooltip = function () {
 
+	let languages = {};
+	languages['en'] = 'Английский';
+	languages['es'] = 'Испанский';
+	languages['pt'] = 'Португальский';
+	languages['ru'] = 'Русский';
+	languages['bg'] = 'Болгарский';
+
 	let target = $('[data-toggle="tooltip"]');
-
-	target.mouseenter(function () {
-		$(this).attr('data-original-title', "Loading...");
-	});
-
-	$(function () {
-		$('[data-toggle="tooltip"]').tooltip()
-	})
 
 	let mouseEnter = Rx.Observable.fromEvent(target, 'mouseenter');
 	let mouseLeave = Rx.Observable.fromEvent(target, 'mouseleave');
 
-	var entered = mouseEnter
+	let entered = mouseEnter
 		.flatMap(function (current) {
 			return Rx.Observable
 				.of(current)
@@ -30,7 +29,9 @@ var installTooltip = function () {
 			// >возвращаем язык
 			// >профит
 
-			$(current.currentTarget).attr('data-original-title', word);
+			let languageLine = languages['en'];
+
+			$(current.currentTarget).attr('data-original-title', languageLine);
 
 			$(function () {
 				$(current.currentTarget).tooltip('show')

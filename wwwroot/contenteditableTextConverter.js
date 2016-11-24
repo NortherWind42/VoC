@@ -26,5 +26,13 @@ var convertText = function (that) {
 
 	$(that).html(pureHtml);
 
+	$('[data-toggle="tooltip"]').mouseenter(function () {
+		$(this).attr('data-original-title', "Loading...");
+	});
+
+	$(function () {
+		$('[data-toggle="tooltip"]').tooltip()
+	})
+
 };
 
