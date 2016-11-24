@@ -14,90 +14,91 @@
 
 <body>
 
-    <voc class="voc">
+	<voc class="voc">
 
-        <div class="container">
+		<div class="container">
 
-            <div class="row">
+			<div class="row">
 
-                <div class="col-sm-12 col-md-6">
+				<div class="col-sm-12 col-md-6">
 
-                    <div class="well voc_log-container">
-                        <form>
-                            <fieldset>
-                                <legend>Вход</legend>
-                                <div class="form-group">
-                                    <label for="loginInter" class="col-xs-2 control-label">Login</label>
+					<div class="well voc_log-container">
+						<form>
+							<fieldset>
+								<legend>Вход</legend>
+								<div class="form-group">
+									<label for="loginInter" class="col-xs-2 control-label">Login</label>
 
-                                    <div class="col-xs-10">
-                                        <input type="text" class="form-control" id="loginInter" placeholder="Login">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="passwordInter" class="col-xs-2 control-label">Password</label>
+									<div class="col-xs-10">
+										<input type="text" class="form-control" id="loginInter" placeholder="Login">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordInter" class="col-xs-2 control-label">Password</label>
 
-                                    <div class="col-xs-10">
-                                        <input type="password" class="form-control" id="passwordInter" placeholder="Password">
-                                    </div>
-                                </div>
-                            </fieldset>
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordInter" placeholder="Password">
+									</div>
+								</div>
+							</fieldset>
 
-                        </form>
-                        <a href="javascript:Login()" class="btn btn-raised btn-primary">Log in</a>
-                    </div>
+						</form>
+						<a href="javascript:login()" class="btn btn-raised btn-primary">Log in</a>
+						<a href="javascript:logout()" class="btn btn-raised btn-primary">Log out</a>
+					</div>
 
-                </div>
+				</div>
 
-                <div class="col-sm-12 col-md-6">
+				<div class="col-sm-12 col-md-6">
 
-                    <div class="well voc_log-container">
-                        <form>
-                            <fieldset>
-                                <legend>Регистрация</legend>
-                                <div class="form-group">
-                                    <label for="loginReg" class="col-xs-2 control-label">Login</label>
+					<div class="well voc_log-container">
+						<form>
+							<fieldset>
+								<legend>Регистрация</legend>
+								<div class="form-group">
+									<label for="loginReg" class="col-xs-2 control-label">Login</label>
 
-                                    <div class="col-xs-10">
-                                        <input type="text" class="form-control" id="loginReg" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="passwordReg" class="col-xs-2 control-label">Password</label>
+									<div class="col-xs-10">
+										<input type="text" class="form-control" id="loginReg" placeholder="Email">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordReg" class="col-xs-2 control-label">Password</label>
 
-                                    <div class="col-xs-10">
-                                        <input type="password" class="form-control" id="passwordReg" placeholder="Password">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordReg" placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
 
-                                    <div class="col-xs-10">
-                                        <input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
-                                    </div>
-                                </div>
-                            </fieldset>
-                            <a href="javascript:SignUp()" class="btn btn-raised btn-primary">Sing up</a>
-                        </form>
-                    </div>
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
+									</div>
+								</div>
+							</fieldset>
+							<a href="javascript:signUp()" class="btn btn-raised btn-primary">Sing up</a>
+						</form>
+					</div>
 
-                </div>
+				</div>
 
-            </div>
+			</div>
 
-            <div class="row">
-                <div class="jumbotron">
-                    <div class="container">
-                        <h3>Текст для распознавания:</h3>
-                        <div class="voc_textarea" contenteditable spellcheck="false">
-                        </div>
-                    </div>
-                </div>
-            </div>
+			<div class="row">
+				<div class="jumbotron">
+					<div class="container">
+						<h3>Текст для распознавания:</h3>
+						<div class="voc_textarea" contenteditable="false" spellcheck="false">
+						</div>
+					</div>
+				</div>
+			</div>
 
-        </div>
+		</div>
 
+	</voc>
 
-    </voc>
     @RenderBody()
 
 
