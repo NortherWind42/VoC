@@ -236,6 +236,13 @@
     </Content>
     <Content Include="Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Scripts\jquery.signalR-2.2.1.min.js" />
+    <Content Include="wwwroot\contenteditableCursorManager.js" />
+    <Content Include="wwwroot\contenteditableTextConverter.js" />
+    <Content Include="wwwroot\gruntfile.js" />
+    <Content Include="wwwroot\icon.png" />
+    <Content Include="wwwroot\index.html" />
+    <Content Include="wwwroot\main.js" />
+    <Content Include="wwwroot\tooltipInstaller.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -248,6 +255,15 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\App\Index.cshtml" />
+    <Content Include="wwwroot\bootstrap-material-design_custom.less" />
+    <Content Include="wwwroot\bs-config.json" />
+    <Content Include="wwwroot\package.json" />
+    <Content Include="wwwroot\styles.less" />
+    <Content Include="wwwroot\voc.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

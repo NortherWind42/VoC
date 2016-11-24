@@ -61,7 +61,7 @@ namespace VoC.DataAccess
 
             foreach (var item in languageList)
             {
-                string value = Regex.Match(TranslationApiResponse(word, item.Code), "lang=\"(..)\"").Value.Replace("lang=\"", string.Empty).Replace("\"", string.Empty);
+                string value = Regex.Match(TranslationApiResponse(word, string.Join(",", languageList.Where(m=>m.Code != "en").Select(m=>m.Code))), "lang=\"(..)\"").Value.Replace("lang=\"", string.Empty).Replace("\"", string.Empty);
 
                 if (value == item.Code)
                 {
@@ -105,7 +105,7 @@ namespace VoC.DataAccess
 
                 var postData = "key=" + key;
                 postData += "&text=" + word;
-                postData += "&hint=" + language;
+               // postData += "&hint=" + language;
                 var data = Encoding.ASCII.GetBytes(postData);
 
                 request.Method = "POST";

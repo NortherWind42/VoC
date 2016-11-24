@@ -1,12 +1,5 @@
 var installTooltip = function () {
 
-	let languages = {};
-	languages['en'] = 'Английский';
-	languages['es'] = 'Испанский';
-	languages['pt'] = 'Португальский';
-	languages['ru'] = 'Русский';
-	languages['bg'] = 'Болгарский';
-
 	let target = $('[data-toggle="tooltip"]');
 
 	let mouseEnter = Rx.Observable.fromEvent(target, 'mouseenter');
@@ -26,12 +19,12 @@ var installTooltip = function () {
 			let word = current.currentTarget.innerText;
 			data = { word: word}
 			$.ajax({
-			    url: '/api/Main/GetTranslation',
-			    data: data,
-			    headers: {
-			        'Authorization': 'Bearer  ' + sessionStorage.getItem("token"),
-			        'Content-Type': 'application/json'
-			    },
+				url: '/api/Main/GetTranslation',
+				data: data,
+				headers: {
+					'Authorization': 'Bearer  ' + localStorage.getItem("token"),
+					'Content-Type': 'application/json'
+				},
 			}).done(function (data) {
 			    $(current.currentTarget).attr('data-original-title', data);
 
@@ -40,8 +33,6 @@ var installTooltip = function () {
 			    })
 			});
 
-			
 		}
 	)
-
 };

@@ -41,7 +41,8 @@
                             </fieldset>
 
                         </form>
-                        <a href="javascript:Login()" class="btn btn-raised btn-primary">Log in</a>
+                        <a href="javascript:login()" class="btn btn-raised btn-primary">Log in</a>
+                        <a href="javascript:logout()" class="btn btn-raised btn-primary">Log out</a>
                     </div>
 
                 </div>
@@ -74,7 +75,7 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <a href="javascript:SignUp()" class="btn btn-raised btn-primary">Sing up</a>
+                            <a href="javascript:signUp()" class="btn btn-raised btn-primary">Sing up</a>
                         </form>
                     </div>
 
@@ -86,12 +87,14 @@
                 <div class="jumbotron">
                     <div class="container">
                         <h3>Текст для распознавания:</h3>
-                        <div class="voc_textarea" contenteditable spellcheck="false">
+                        <div class="voc_textarea" contenteditable="false" spellcheck="false">
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
+
     </voc>
     @RenderBody()
     @Scripts.Render("~/bundles/app-scripts")
@@ -104,7 +107,7 @@
 
         var notificationhub = $.connection.userTop;
 
-        notificationhub.client.UpdateList = function () {
+        notificationhub.client.UpdateList = function (data) {
             console.log("Update statistic")
         };
         $.connection.hub.start();
