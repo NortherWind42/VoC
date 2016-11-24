@@ -12,6 +12,11 @@ namespace VoC.DataAccess
     [Table("Languages")]
     public class Language
     {
+        public Language()
+        {
+            Translations = new HashSet<WordTranslations>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -21,6 +26,6 @@ namespace VoC.DataAccess
         [Required]
         public string Code { get; set; }
 
-        public ICollection<Word> Words { get; set; }
+        public HashSet<WordTranslations> Translations { get; set; }
     }
 }

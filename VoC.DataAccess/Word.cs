@@ -13,15 +13,16 @@ namespace VoC.DataAccess
     {
         public Word()
         {
-            Languages = new HashSet<Language>();
+            Translations = new HashSet<WordTranslations>();
         }
+
         [Key]
         public int Id { get; set; }
 
         [Required]
         public string WordValue { get; set; }
 
-        public HashSet<Language> Languages { get; set; }
+        public HashSet<WordTranslations> Translations { get; set; }
 
     }
 }

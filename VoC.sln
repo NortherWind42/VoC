@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoC.WebApp", "VoC.WebApp\Vo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VoC.DataAccess", "VoC.DataAccess\VoC.DataAccess.csproj", "{0584699A-E017-4C67-ACAC-FE49D851FEB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessModel", "BusinessModel\BusinessModel.csproj", "{04E1154B-4410-4CB4-AC6A-6E0C55DBA114}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0584699A-E017-4C67-ACAC-FE49D851FEB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0584699A-E017-4C67-ACAC-FE49D851FEB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0584699A-E017-4C67-ACAC-FE49D851FEB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04E1154B-4410-4CB4-AC6A-6E0C55DBA114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04E1154B-4410-4CB4-AC6A-6E0C55DBA114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04E1154B-4410-4CB4-AC6A-6E0C55DBA114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04E1154B-4410-4CB4-AC6A-6E0C55DBA114}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

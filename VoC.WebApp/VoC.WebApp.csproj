@@ -85,6 +85,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -103,9 +107,6 @@
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
     </Reference>
@@ -220,6 +221,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Hubs\UserTop.cs" />
+    <Compile Include="Migrations\201611241910349_12312.cs" />
+    <Compile Include="Migrations\201611241910349_12312.Designer.cs">
+      <DependentUpon>201611241910349_12312.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -242,6 +248,7 @@
     <Content Include="wwwroot\icon.png" />
     <Content Include="wwwroot\index.html" />
     <Content Include="wwwroot\main.js" />
+    <Content Include="wwwroot\styles.css" />
     <Content Include="wwwroot\tooltipInstaller.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -265,7 +272,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201611241910349_12312.resx">
+      <DependentUpon>201611241910349_12312.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -274,6 +285,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BusinessModel\BusinessModel.csproj">
+      <Project>{04e1154b-4410-4cb4-ac6a-6e0c55dba114}</Project>
+      <Name>BusinessModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VoC.DataAccess\VoC.DataAccess.csproj">
       <Project>{0584699a-e017-4c67-acac-fe49d851feb0}</Project>
       <Name>VoC.DataAccess</Name>

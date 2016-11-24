@@ -14,14 +14,16 @@ namespace VoC.DataAccess.Migrations
 
         protected override void Seed(VoC.DataAccess.MainContext context)
         {
-            //  This method will be called after migrating to the latest version.
-              context.Languages.AddOrUpdate( m=>m.Code,
-                new Language { Name = "Английский" , Code= "en"},
-                new Language { Name = "Русский", Code = "ru"},
-                new Language { Name = "Португальский", Code = "pt"},
+
+
+            context.Languages.AddOrUpdate(
+              p => p.Code,
+               new Language { Name = "Английский", Code = "en" },
+                new Language { Name = "Русский", Code = "ru" },
+                new Language { Name = "Португальский", Code = "pt" },
                 new Language { Name = "Болгарский", Code = "bg" },
                 new Language { Name = "Испанский", Code = "es" }
-              );
+            );
             context.SaveChanges();
         }
     }

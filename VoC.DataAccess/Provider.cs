@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessModel;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +14,7 @@ namespace VoC.DataAccess
 {
     public class Provider : IDisposable
     {
-        const string key = "trnsl.1.1.20161124T130153Z.2beb53fe9af9b0e0.68e641a241ea4a230747a8c160f2b294bf1f3f58";
+        const string key = "d48050435de0f4f951de4b82cfd8acc0";
         const string unknown = "unknown";
         private MainContext context;
         private object contextDisposeLocker = new object();
@@ -34,53 +36,76 @@ namespace VoC.DataAccess
             context.SaveChanges();
         }
 
-        public Word CheckWord(string word, Guid userId)
+        public WordModel CheckWord(string wordValue, Guid userId)
         {
-            var values = context.Words.Include("Languages").Where(m => m.WordValue == word).FirstOrDefault();
+            WordModel model = null;
 
-            var user = context.UserHistory.Where(m => m.UserId == userId).First();
-            user.RequestCounter++;
-            var average = (user.AverageTime + (DateTime.Now - user.LastRequest));
-            user.AverageTime = new TimeSpan(average.Ticks / 2);
-            user.LastRequest = DateTime.Now;
-            context.Entry(user).State = System.Data.Entity.EntityState.Modified;
-            context.SaveChanges();
+            var words = context.Words.Include("Translations").Include("Translations.LanguageAccessory").Where(m => m.WordValue == wordValue);
 
-            return values;
+            this.RegistrationUserActivity(userId);
+
+            if (words.Any())
+            {
+                var word = words.First();
+                model = new WordModel()
+                {
+                    WordValue = wordValue,
+                    Probabilities = new List<TranslationModel>(word.Translations
+                                                                   .Select(m => new TranslationModel()
+                                                                   {
+                                                                       Language = m.LanguageAccessory.Name,
+                                                                       Probability = m.Probability
+                                                                   }))
+                };
+
+            }
+
+            return model;
         }
 
-        public Word AddWords(string word)
+        public WordModel AddWords(string word)
         {
             Word wordModel = new Word()
             {
                 WordValue = word
             };
 
-            string lastResponse = "";
-            var languageList = context.Languages.ToList();
-
-            foreach (var item in languageList)
+            var model = new WordModel()
             {
-                string value = Regex.Match(TranslationApiResponse(word, string.Join(",", languageList.Where(m=>m.Code != "en").Select(m=>m.Code))), "lang=\"(..)\"").Value.Replace("lang=\"", string.Empty).Replace("\"", string.Empty);
+                WordValue = word,
+                Probabilities = new List<TranslationModel>()
+            };
 
-                if (value == item.Code)
-                {
-                    wordModel.Languages.Add(item);
-                }
-                lastResponse = value;
-            }
 
-            if (wordModel.Languages.Count == 0 && lastResponse == "")
-            {
-                var ruslang = languageList.Where(m => m.Code == "ru");
-                if (ruslang.Any())
-                {
-                    wordModel.Languages.Add(ruslang.First());
-                }
-            }
+            string value = TranslationApiResponse(word);
+
+            DetectServerResult result = JsonConvert.DeserializeObject<DetectServerResult>(value);
+
             context.Words.Add(wordModel);
             context.SaveChanges();
-            return wordModel;
+
+            var codes = result.Results.Select(m => m.LanguageCode);
+
+            var languageList = context.Languages.Where(m => codes.Contains(m.Code)).ToList();
+
+            languageList.ForEach(delegate (Language lang)
+            {
+                context.Translations.Add(new WordTranslations()
+                {
+                    Expression = wordModel,
+                    LanguageAccessory = lang,
+                    Probability = result.Results.Where(m => m.LanguageCode == lang.Code).First().Percentage
+                });
+
+                model.Probabilities.Add(new TranslationModel()
+                {
+                    Language = lang.Name,
+                    Probability = result.Results.Where(m => m.LanguageCode == lang.Code).First().Percentage
+                });
+            });
+            context.SaveChanges();
+
+            return model;
         }
 
         public List<UserHistory> GetTopTen()
@@ -89,38 +114,12 @@ namespace VoC.DataAccess
             return users;
         }
 
-        private string TranslationApiResponse(string word, string language)
+        private string TranslationApiResponse(string word)
         {
-            using (var client = new HttpClient())
-            {
-                var values = new Dictionary<string, string>
-                {
-                   { "key", key },
-                   { "text", word },
-                   { "hint", language}
-                };
-
-
-                var request = (HttpWebRequest)WebRequest.Create("https://translate.yandex.net/api/v1.5/tr/detect");
-
-                var postData = "key=" + key;
-                postData += "&text=" + word;
-               // postData += "&hint=" + language;
-                var data = Encoding.ASCII.GetBytes(postData);
-
-                request.Method = "POST";
-                request.ContentType = "application/x-www-form-urlencoded";
-                request.ContentLength = data.Length;
-
-                using (var stream = request.GetRequestStream())
-                {
-                    stream.Write(data, 0, data.Length);
-                }
-
-                var response = (HttpWebResponse)request.GetResponse();
-
-                return new StreamReader(response.GetResponseStream()).ReadToEnd();
-            }
+            var request = (HttpWebRequest)WebRequest.Create(@"http://apilayer.net/api/detect?access_key=d48050435de0f4f951de4b82cfd8acc0&query=" + word);
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            return responseString;
         }
 
         public void Dispose()
@@ -135,6 +134,18 @@ namespace VoC.DataAccess
                     }
                 }
             }
+        }
+
+
+        private void RegistrationUserActivity(Guid userId)
+        {
+            var user = context.UserHistory.Where(m => m.UserId == userId).First();
+            user.RequestCounter++;
+            var average = (user.AverageTime + (DateTime.Now - user.LastRequest));
+            user.AverageTime = new TimeSpan(average.Ticks / 2);
+            user.LastRequest = DateTime.Now;
+            context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
         }
     }
 }

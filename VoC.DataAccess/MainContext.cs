@@ -10,8 +10,7 @@ namespace VoC.DataAccess
     public partial class MainContext : DbContext
     {
         public MainContext()
-            //: base(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Aleh_Vasilyeu1\Documents\VoC.mdf;Integrated Security = True; Connect Timeout = 30")
-         : base(@"Data Source=localhost;Initial Catalog=VoC;Integrated Security=True")
+         : base(@"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=VoC;Integrated Security=True")
 			
         {
 
@@ -20,15 +19,10 @@ namespace VoC.DataAccess
         public DbSet<Language> Languages { get; set; }
         public DbSet<Word> Words { get; set; }
         public DbSet<UserHistory> UserHistory { get; set; }
+        public DbSet<WordTranslations> Translations { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Language>().HasMany(m => m.Words).WithMany(m => m.Languages).Map(cs =>
-            {
-                cs.MapLeftKey("LanguageRefId");
-                cs.MapRightKey("WordsRefId");
-                cs.ToTable("TranslationsRelation");
-            });
         }
 
     }

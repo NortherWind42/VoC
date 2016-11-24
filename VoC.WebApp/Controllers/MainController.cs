@@ -23,9 +23,9 @@ namespace VoC.WebApp.Controllers
         [Route("GetTranslation")]
         public IHttpActionResult GetTranslation(string word)
         {
-            if (!string.IsNullOrWhiteSpace(word) && word.Length > 4)
+            if (!string.IsNullOrWhiteSpace(word) && word.Length > 3)
             {
-                string result = string.Empty; 
+                string result = string.Empty;
                 using (Provider provider = new Provider())
                 {
                     var selectedWord = provider.CheckWord(word, UserId);
@@ -34,7 +34,7 @@ namespace VoC.WebApp.Controllers
                     {
                         selectedWord = provider.AddWords(word);
                     }
-                    result = String.Join(", ", selectedWord.Languages.Select(m => m.Name));
+                    result = String.Join(", ", selectedWord.Probabilities.Select(m => m.Language + " : " + m.Probability.ToString()));
                 }
 
                 var context = Microsoft.AspNet.SignalR.GlobalHost.ConnectionManager.GetHubContext<UserTop>();
