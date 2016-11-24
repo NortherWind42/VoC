@@ -1,4 +1,4 @@
-*.com
+﻿*.com
 *.class
 *.dll
 *.exe
@@ -73,6 +73,6 @@ _[Ss]cripts
 ######################
 # Custom #
 ######################
-wwwroot/node_modules 
-wwwroot/styles.css
-VoC.WebApp/wwwroot/node_modules/
+VoC.WebApp/wwwroot/node_modules
+VoC.WebApp/wwwroot/styles.css
+
