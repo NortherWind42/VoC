@@ -7,13 +7,13 @@ namespace VoC.DataAccess.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class _123 : IMigrationMetadata
+    public sealed partial class sdfgsfdgsdfg : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(_123));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(sdfgsfdgsdfg));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611241839017_123"; }
+            get { return "201611250800440_sdfgsfdgsdfg"; }
         }
         
         string IMigrationMetadata.Source
