@@ -17,20 +17,20 @@ var installTooltip = function () {
 		function (current) {
 
 			let word = current.currentTarget.innerText;
-			data = { word: word}
+			data = { word: word }
 			$.ajax({
 				url: '/api/Main/GetTranslation',
 				data: data,
 				headers: {
-					'Authorization': 'Bearer  ' + localStorage.getItem("token"),
+					'Authorization': 'Bearer ' + localStorage.getItem("token"),
 					'Content-Type': 'application/json'
 				},
 			}).done(function (data) {
-			    $(current.currentTarget).attr('data-original-title', data);
+				$(current.currentTarget).attr('data-original-title', data);
 
-			    $(function () {
-			        $(current.currentTarget).tooltip('show')
-			    })
+				$(function () {
+					$(current.currentTarget).tooltip('show')
+				})
 			});
 
 		}

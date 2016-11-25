@@ -1,111 +1,111 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="icon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>VoC</title>
-    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-    <link rel="stylesheet" href="../wwwroot/styles.css">
+	<meta charset="UTF-8">
+	<link rel="icon" href="../wwwroot/icon.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+	<title>VoC</title>
+	<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+	<link rel="stylesheet" href="../wwwroot/styles.css">
 </head>
 
 <body>
 
-		<voc class="voc">
+	<voc class="voc">
 
-			<div class="container">
+		<div class="container">
 
-				<div class="row">
+			<div class="row">
 
-					<div class="col-sm-12 col-md-6">
+				<div class="col-sm-12 col-md-6">
 
-						<div class="well voc_log-container">
-							<form>
-								<fieldset>
-									<legend>Вход</legend>
-									<div class="form-group">
-										<label for="loginInter" class="col-xs-2 control-label">Login</label>
+					<div class="well voc_log-container">
+						<form>
+							<fieldset>
+								<legend>Sign in</legend>
+								<div class="form-group">
+									<label for="loginInter" class="col-xs-2 control-label">Login</label>
 
-										<div class="col-xs-10">
-											<input type="text" class="form-control" id="loginInter" placeholder="Login">
-										</div>
+									<div class="col-xs-10">
+										<input type="text" class="form-control" id="loginInter" placeholder="Login">
 									</div>
-									<div class="form-group">
-										<label for="passwordInter" class="col-xs-2 control-label">Password</label>
+								</div>
+								<div class="form-group">
+									<label for="passwordInter" class="col-xs-2 control-label">Password</label>
 
-										<div class="col-xs-10">
-											<input type="password" class="form-control" id="passwordInter" placeholder="Password">
-										</div>
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordInter" placeholder="Password">
 									</div>
-								</fieldset>
+								</div>
+							</fieldset>
 
-							</form>
-							<a href="javascript:login()" class="btn btn-raised btn-primary">Log in</a>
-							<a href="javascript:logout()" id="logout" class="btn btn-raised btn-primary disabled">Log out</a>
-						</div>
-
-					</div>
-
-					<div class="col-sm-12 col-md-6">
-
-						<div class="well voc_log-container">
-							<form>
-								<fieldset>
-									<legend>Регистрация</legend>
-									<div class="form-group">
-										<label for="loginReg" class="col-xs-2 control-label">Login</label>
-
-										<div class="col-xs-10">
-											<input type="text" class="form-control" id="loginReg" placeholder="Email">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="passwordReg" class="col-xs-2 control-label">Password</label>
-
-										<div class="col-xs-10">
-											<input type="password" class="form-control" id="passwordReg" placeholder="Password">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
-
-										<div class="col-xs-10">
-											<input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
-										</div>
-									</div>
-								</fieldset>
-								<a href="javascript:signUp()" class="btn btn-raised btn-primary">Sing up</a>
-							</form>
-						</div>
-
+						</form>
+						<a href="javascript:login()" class="btn btn-raised btn-primary">Log in</a>
+						<a href="javascript:logout()" id="logout" class="btn btn-raised btn-primary disabled">Log out</a>
 					</div>
 
 				</div>
 
-				<div class="voc_recognition-container hidden">
-					<div class="row">
-						<div class="jumbotron">
-							<div class="container">
-								<h3>Текст для распознавания:</h3>
-								<div class="voc_textarea" contenteditable="false" spellcheck="false">
+				<div class="col-sm-12 col-md-6">
+
+					<div class="well voc_log-container">
+						<form>
+							<fieldset>
+								<legend>Create new account</legend>
+								<div class="form-group">
+									<label for="loginReg" class="col-xs-2 control-label">Login</label>
+
+									<div class="col-xs-10">
+										<input type="text" class="form-control" id="loginReg" placeholder="Email">
+									</div>
 								</div>
-							</div>
-						</div>
+								<div class="form-group">
+									<label for="passwordReg" class="col-xs-2 control-label">Password</label>
+
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordReg" placeholder="Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
+
+									<div class="col-xs-10">
+										<input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
+									</div>
+								</div>
+							</fieldset>
+							<a href="javascript:signUp()" class="btn btn-raised btn-primary">Sing up</a>
+						</form>
 					</div>
+
 				</div>
 
 			</div>
 
+			<div class="voc_recognition-container hidden">
+				<div class="row">
+					<div class="jumbotron">
+						<div class="container">
+							<h3 id="greeting"></h3>
+							<h3> Enter your text down below:</h3>
+							<div class="voc_textarea" contenteditable spellcheck="false">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 
-		</voc>
-    @RenderBody()
-    @Scripts.Render("~/bundles/app-scripts")
+		</div>
 
-    <script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
-    <!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
-    <script src="~/signalr/hubs"></script>
-    <script type="text/javascript">
+
+	</voc>
+	@RenderBody() @Scripts.Render("~/bundles/app-scripts")
+
+	<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
+	<!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
+	<script src="~/signalr/hubs"></script>
+	<script type="text/javascript">
     $(function () {
 
         var notificationhub = $.connection.userTop;
@@ -117,6 +117,7 @@
     });
     </script>
 
-    <script>$.material.init()</script>
+	<script>$.material.init()</script>
 </body>
+
 </html>
