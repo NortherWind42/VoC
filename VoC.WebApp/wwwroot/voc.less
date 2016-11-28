@@ -3,12 +3,14 @@ voc {
 }
 
 .voc {
-		height: 100%;
+		display: flex;
+		align-items: center;
+		min-height: 100%;
 		width: 100%;
+		margin-top: 20px;
 
 		&_textarea {
-			width: 100%;
-			min-height: 300px;
+			min-height: 295px;
 			font-size: 24px;
 			padding: 8px;
 			background: white;
@@ -21,21 +23,23 @@ voc {
 		}
 
 		&_log-container {
-			margin-top: 115px;
-			min-height: 330px;
-
-			& fieldset {
-				min-height: 245px;
+			&-button {
+				margin-top: 28px; 
 			}
 		}
 
-		&_recognition-container {
+		&_private-area {
 			display: block;
 
 			&.hidden {
 				display: none;
 			}
+		}
 
+		&_footer-links {
+			text-align: center;
+			margin-bottom: 20px;
+			margin-top: 10px;
 		}
 	}
 

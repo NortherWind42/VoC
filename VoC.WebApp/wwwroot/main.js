@@ -4,16 +4,17 @@ var authorizeProcess = () => {
 
 		let token = localStorage.getItem("token");
 		if (token) {
-		$(".voc_recognition-container").removeClass("hidden");
-		$("#logout").removeClass("disabled");
+			$(".voc_private-area").removeClass("hidden");
+			$("#logoutBtn").css("display", "block");
+			$("#loginBtn").css("display", "none");
 
-		$(".voc_textarea").empty();
+			$(".voc_textarea").empty();
 
-		let userName = localStorage.getItem("userName");
-		$("#greeting").text(`Hello ${userName}!`);
-		$("#loginInter").val(userName);
+			let userName = localStorage.getItem("userName");
+			$("#greeting").text(`Hello ${userName}!`);
+			$("#loginInter").val(userName);
 
-		console.log(`user ${userName} is authorized`)
+			console.log(`user ${userName} is authorized`)
 		}
 
 };
@@ -89,8 +90,9 @@ function logout() {
 		localStorage.removeItem("userName");
 		$("#loginInter").val("");
 		$("#passwordInter").val("");
-		$(".voc_recognition-container").addClass("hidden");
-		$("#logout").addClass("disabled");
+		$(".voc_private-area").addClass("hidden");
+		$("#logoutBtn").css("display", "none");
+		$("#loginBtn").css("display", "block");
 		$(".voc_textarea").empty();
 		console.log("logout is done");
 	});

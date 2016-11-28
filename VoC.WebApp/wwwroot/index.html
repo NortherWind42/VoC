@@ -16,89 +16,136 @@
 
 	<voc class="voc">
 
-		<div class="container">
+		<div class="container ">
 
 			<div class="row">
 
-				<div class="col-sm-12 col-md-6">
+				<div class="col-sm-12 col-md-4 ">
 
 					<div class="well voc_log-container">
 						<form>
 							<fieldset>
-								<legend>Вход</legend>
-								<div class="form-group">
-									<label for="loginInter" class="col-xs-2 control-label">Login</label>
-
-									<div class="col-xs-10">
-										<input type="text" class="form-control" id="loginInter" placeholder="Login">
-									</div>
+								<legend>Sign in</legend>
+								<div class="form-group label-floating">
+									<label for="loginInter" class="control-label">Login</label>
+									<input type="email" class="form-control" id="loginInter">
 								</div>
-								<div class="form-group">
-									<label for="passwordInter" class="col-xs-2 control-label">Password</label>
-
-									<div class="col-xs-10">
-										<input type="password" class="form-control" id="passwordInter" placeholder="Password">
-									</div>
+								<div class="form-group label-floating">
+									<label for="passwordInter" class="control-label">Password</label>
+									<input type="password" class="form-control" id="passwordInter">
 								</div>
 							</fieldset>
 
 						</form>
-						<a href="javascript:login()" class="btn btn-raised btn-primary">Log in</a>
-						<a href="javascript:logout()" id="logout" class="btn btn-raised btn-primary disabled">Log out</a>
+						<a href="javascript:login()" class="btn btn-default btn-lg btn-block btn-raised btn-primary voc_log-container-button">Log in</a>
+						<a href="javascript:logout()" id="logout" class="btn btn-default btn-lg btn-block btn-raised btn-primary voc_log-container-button"
+							style="display: none">Log out</a>
 					</div>
-
-				</div>
-
-				<div class="col-sm-12 col-md-6">
 
 					<div class="well voc_log-container">
 						<form>
 							<fieldset>
-								<legend>Регистрация</legend>
-								<div class="form-group">
-									<label for="loginReg" class="col-xs-2 control-label">Login</label>
-
-									<div class="col-xs-10">
-										<input type="text" class="form-control" id="loginReg" placeholder="Email">
-									</div>
+								<legend>Create new account</legend>
+								<div class="form-group label-floating">
+									<label for="loginReg" class="control-label">Login</label>
+									<input type="email" class="form-control" id="loginReg">
+									<span class="help-block">enter a valid email address</span>
 								</div>
-								<div class="form-group">
-									<label for="passwordReg" class="col-xs-2 control-label">Password</label>
-
-									<div class="col-xs-10">
-										<input type="password" class="form-control" id="passwordReg" placeholder="Password">
-									</div>
+								<div class="form-group label-floating">
+									<label for="passwordReg" class="control-label">Password</label>
+									<input type="password" class="form-control" id="passwordReg">
+									<span class="help-block">password must contain 6 or more characters</span>
 								</div>
-								<div class="form-group">
-									<label for="passwordRegConfirm" class="col-xs-2 control-label">Confirm</label>
-
-									<div class="col-xs-10">
-										<input type="password" class="form-control" id="passwordRegConfirm" placeholder="Confirm password">
-									</div>
+								<div class="form-group label-floating">
+									<label for="passwordRegConfirm" class="control-label">Confirm password</label>
+									<input type="password" class="form-control" id="passwordRegConfirm">
+									<span class="help-block">passwords must match</span>
 								</div>
 							</fieldset>
-							<a href="javascript:signUp()" class="btn btn-raised btn-primary">Sing up</a>
+							<a href="javascript:signUp()" class="btn btn-default btn-lg btn-block btn-raised btn-primary voc_log-container-button">Sing up</a>
 						</form>
 					</div>
 
 				</div>
 
-			</div>
+				<div class="col-sm-12 col-md-8">
 
-			<div class="voc_recognition-container hidden">
-				<div class="row">
-					<div class="jumbotron">
-						<div class="container">
-							<h3>Текст для распознавания:</h3>
-							<div class="voc_textarea" contenteditable="false" spellcheck="false">
+					<div class="voc_recognition-container">
+						<div class="jumbotron">
+							<div class="container">
+								<h3 id="greeting"></h3>
+								<h3> Enter your text down below:</h3>
+								<div class="voc_textarea" contenteditable spellcheck="false">
+								</div>
 							</div>
 						</div>
 					</div>
+
+					<div class="well">
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>User</th>
+									<th>Number of requests</th>
+									<th>Date of last request</th>
+									<th>Time between requests</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td>Oleg</td>
+									<td>2380</td>
+									<td>28.11.2016 12:30</td>
+									<td>8 sec</td>
+								</tr>
+								<tr>
+									<td>2</td>
+									<td>Andrey</td>
+									<td>2150</td>
+									<td>28.11.2016 10:25</td>
+									<td>4 sec</td>
+								</tr>
+								<tr>
+									<td>3</td>
+									<td>Dany</td>
+									<td>924</td>
+									<td>28.11.2016 11:54</td>
+									<td>12 sec</td>
+								</tr>
+								<tr>
+									<td>4</td>
+									<td>Kate</td>
+									<td>580</td>
+									<td>28.11.2016 14:10</td>
+									<td>10 sec</td>
+								</tr>
+								<tr>
+									<td>5</td>
+									<td>Max</td>
+									<td>120</td>
+									<td>28.11.2016 17:32</td>
+									<td>50 sec</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
 				</div>
+
 			</div>
 
-		</div>
+			<p class="voc_footer-links">
+				<span>Created by
+					<br>
+					<a href="//vk.com/neverwind42" target="_blank">Oleg Vasilyev</a>
+					& 
+					<a href="//vk.com/stalkermanru" target="_blank">Alexander Stukachyov</a> 
+				</span>
+			</p>
 
+		</div>
 
 	</voc>
 
