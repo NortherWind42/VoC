@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 
 <head>
@@ -20,47 +20,50 @@
 
 				<div class="col-sm-12 col-md-4 ">
 
-					<div class="well voc_log-container">
-						<form>
+					<div class="well voc_login-container">
+						<form id="loginForm">
 							<fieldset>
 								<legend>Sign in</legend>
-								<div class="form-group label-floating">
+								<div class="form-group label-floating" id="loginInterGroup">
 									<label for="loginInter" class="control-label">Login</label>
-									<input type="email" class="form-control" id="loginInter">
+									<input type="email" class="form-control" id="loginInter" required spellcheck="false">
+									<span class="help-block"></span>
 								</div>
-								<div class="form-group label-floating">
+								<div class="form-group label-floating" id="passwordInterGroup">
 									<label for="passwordInter" class="control-label">Password</label>
-									<input type="password" class="form-control" id="passwordInter">
+									<input type="password" class="form-control" id="passwordInter" required pattern="(.).{5,}">
+									<span class="help-block"></span>
 								</div>
 							</fieldset>
-
+							<a href="javascript: onLoginClick()" id="loginBtn" class="btn btn-default btn-lg btn-block btn-raised btn-primary">Log in</a>
 						</form>
-						<a href="javascript:login()" id="loginBtn" class="btn btn-default btn-lg btn-block btn-raised btn-primary voc_log-container-button">Log in</a>
-						<a href="javascript:logout()" id="logoutBtn" class="btn btn-default btn-lg btn-block btn-raised btn-primary voc_log-container-button"
-							style="display: none">Log out</a>
+						<form id="accountForm">
+							<legend id="greeting"></legend>
+							<a href="javascript:onLogoutClick()" id="logoutBtn" class="btn btn-default btn-lg btn-block btn-raised btn-danger">Log out</a>
+						</form>
 					</div>
 
-					<div class="well voc_log-container">
-						<form>
+					<div class="well voc_register-container">
+						<form autocomplete="off">
 							<fieldset>
-								<legend>Create new account</legend>
-								<div class="form-group label-floating">
+								<legend>Create new account and enter</legend>
+								<div class="form-group label-floating" id="loginRegGroup">
 									<label for="loginReg" class="control-label">Login</label>
-									<input type="email" class="form-control" id="loginReg">
-									<span class="help-block">enter a valid email address</span>
+									<input type="email" class="form-control" id="loginReg" required spellcheck="false">
+									<span class="help-block"></span>
 								</div>
-								<div class="form-group label-floating">
+								<div class="form-group label-floating" id="passwordRegGroup">
 									<label for="passwordReg" class="control-label">Password</label>
-									<input type="password" class="form-control" id="passwordReg">
-									<span class="help-block">password must contain 6 or more characters</span>
+									<input type="password" class="form-control" id="passwordReg" required pattern="(.).{5,}">
+									<span class="help-block"></span>
 								</div>
-								<div class="form-group label-floating">
+								<div class="form-group label-floating" id="passwordRegConfirmGroup">
 									<label for="passwordRegConfirm" class="control-label">Confirm password</label>
-									<input type="password" class="form-control" id="passwordRegConfirm">
-									<span class="help-block">passwords must match</span>
+									<input type="password" class="form-control" id="passwordRegConfirm" required pattern="(.).{5,}">
+									<span class="help-block"></span>
 								</div>
 							</fieldset>
-							<a href="javascript:signUp()" class="btn btn-default btn-lg btn-block btn-raised btn-primary voc_log-container-button">Sing up</a>
+							<a href="javascript:onSignUpClick()" class="btn btn-default btn-lg btn-block btn-raised btn-primary">Sing up</a>
 						</form>
 					</div>
 
@@ -68,12 +71,17 @@
 
 				<div class="col-sm-12 col-md-8">
 
-					<div class="voc_private-area hidden ">
+					<div>
+
+						<div class="panel well panel-danger voc_info-panel">
+							<div class="panel-heading">
+								<h3 class="panel-title voc_info-panel-content">Hello! Please, sign in.</h3>
+							</div>
+						</div>
+
 						<div class="jumbotron">
 							<div class="container">
-								<h3 id="greeting"></h3>
-								<h3> Enter your text down below:</h3>
-								<div class="voc_textarea" contenteditable spellcheck="false">
+								<div class="voc_input" contenteditable="false" spellcheck="false">
 								</div>
 							</div>
 						</div>
@@ -89,42 +97,7 @@
 										<th>Time between requests</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>1</td>
-										<td>Oleg</td>
-										<td>2380</td>
-										<td>28.11.2016 12:30</td>
-										<td>8 sec</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>Andrey</td>
-										<td>2150</td>
-										<td>28.11.2016 10:25</td>
-										<td>4 sec</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>Dany</td>
-										<td>924</td>
-										<td>28.11.2016 11:54</td>
-										<td>12 sec</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>Kate</td>
-										<td>580</td>
-										<td>28.11.2016 14:10</td>
-										<td>10 sec</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>Max</td>
-										<td>120</td>
-										<td>28.11.2016 17:32</td>
-										<td>50 sec</td>
-									</tr>
+								<tbody id="topList">
 								</tbody>
 							</table>
 						</div>
@@ -152,18 +125,6 @@
 	<script src="~/Scripts/jquery.signalR-2.2.1.min.js"></script>
 	<!--Ссылка на автоматически сгенерированный скрипт хаба SignalR -->
 	<script src="~/signalr/hubs"></script>
-	<script type="text/javascript">
-    $(function () {
-
-        var notificationhub = $.connection.userTop;
-
-        notificationhub.client.UpdateList = function (data) {
-            console.log("Update statistic")
-        };
-        $.connection.hub.start();
-    });
-    </script>
-
 	<script>$.material.init()</script>
 </body>
 

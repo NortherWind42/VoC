@@ -45,9 +45,16 @@ function removeError(groupId) {
 	$(`#${groupId} .help-block`).text("");
 	$(`#${groupId}`).removeClass("has-error");
 }
+
 function addError(groupId, error) {
 	$(`#${groupId}`).addClass("has-error");
 	$(`#${groupId} .help-block`).text(error);
+}
+
+function removeAllErrors() {
+		for (let group of ["passwordRegConfirmGroup", "passwordRegGroup", "loginRegGroup", "loginInterGroup", "passwordInterGroup"]) {
+		removeError(group);
+		}
 }
 
 function onSignUpClick() {
@@ -67,13 +74,12 @@ function onSignUpClick() {
 		let userName = $("#loginReg").val();
 		let password = $("#passwordReg").val();
 		console.log(`user ${userName} successfully added`);
-		login(userName, password)
+		login(userName, password);
+		removeAllErrors();
 
 		}).fail(function (data) {
 
-		for (let group of ["passwordRegConfirmGroup", "passwordRegGroup", "loginRegGroup"]) {
-			removeError(group);
-		}
+		removeAllErrors();
 
 		data.responseJSON.ModelState["model.ConfirmPassword"] ? addError("passwordRegConfirmGroup", "password and confirmation password do not match") : null
 
@@ -108,8 +114,8 @@ function login(username, password) {
 		localStorage.setItem("token", data.access_token);
 		localStorage.setItem("userName", data.userName);
 		authorizeProcess();
-		removeError("loginInterGroup");
-		removeError("passwordInterGroup");
+		removeAllErrors();
+		updateTopList();
 	}).fail(function (data) {
 		addError("loginInterGroup", "user name or password is incorrect");
 		addError("passwordInterGroup", "user name or password is incorrect")
@@ -140,7 +146,41 @@ function onLogoutClick() {
 		$("#accountForm").css("display", "none");
 
 		$(".voc_register-container").css("display", "block");
-
+		$('#topList tr').detach();
 		console.log("logout is done");
 	});
 }
+
+let updateTopList = () => {
+		if (localStorage.getItem("token")) {
+		$.ajax({
+			headers: {
+				'Authorization': 'Bearer  ' + localStorage.getItem("token"),
+				'Content-Type': 'application/json'
+			},
+			url: "/api/main/gettop",
+			success: function (result) {
+				let data = JSON.parse(result);
+				$('#topList tr').detach();
+				$('#topList').append(
+					$.map(data, function (ignore, index) {
+						var date = new Date((data[index].LastRequest || "").replace(/-/g, "/").replace(/[TZ]/g, " "));
+						return '<tr><td>' + (+index + 1) + '</td><td>' + data[index].Username + '</td><td>' + data[index].RequestCounter + '</td><td>' + date.toLocaleDateString() + " " + date.toLocaleTimeString() + '</td><td>' + data[index].AverageTime.split(".")[0] + '</td></tr>';
+					}).join()
+				);
+			}
+		});
+		}
+}
+
+$(function () {
+
+	updateTopList();
+
+	var notificationhub = $.connection.userTop;
+
+	notificationhub.client.UpdateList = function (data) {
+		updateTopList();
+	};
+	$.connection.hub.start();
+});
